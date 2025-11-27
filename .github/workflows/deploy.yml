@@ -53,15 +53,15 @@ jobs:
             
             # Detener contenedores anteriores
             echo "🛑 Deteniendo contenedores anteriores..."
-            docker compose down 2>/dev/null || true
+            docker compose -f docker-compose.prod.yml down 2>/dev/null || true
             
             # Construir y levantar contenedores
             echo "🔨 Construyendo y desplegando..."
-            docker compose up -d --build
+            docker compose -f docker-compose.prod.yml up -d --build
             
             # Verificar que esté corriendo
             echo "✅ Verificando contenedores..."
-            docker compose ps
+            docker compose -f docker-compose.prod.yml ps
             
             # Limpiar imágenes antiguas
             echo "🧹 Limpiando imágenes antiguas..."
