@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Emprendedor - NexaModa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#6b21a8',
+                            700: '#5b1a8c',
+                            800: '#4c1570',
+                            900: '#3d1158',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#d4af37',
+                            600: '#b8941f',
+                            700: '#9d7c1a',
+                            800: '#826515',
+                            900: '#674e11',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #6b21a8 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f3e8ff 0%, #fef9c3 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(107, 33, 168, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-scissors text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold gradient-text">NexaModa</span>
+                    </a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="#" class="text-primary-600 font-semibold border-b-2 border-primary-600 py-2">Inicio</a>
+                        <a href="buscar-talleres.html" class="text-gray-600 hover:text-primary-600 py-2">Buscar Talleres</a>
+                        <a href="#" class="text-gray-600 hover:text-primary-600 py-2">Mis Proyectos</a>
+                        <a href="#" class="text-gray-600 hover:text-primary-600 py-2">Mensajes</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="relative text-gray-600 hover:text-primary-600">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">3</span>
+                    </button>
+                    <div class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div class="hidden md:block">
+                            <p class="text-sm font-semibold text-gray-900">Laura Martínez</p>
+                            <p class="text-xs text-gray-500">Emprendedor</p>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400 text-sm"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-20 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Bienvenida, Laura 👋</h1>
+                <p class="text-gray-600">Gestiona tus proyectos y encuentra el taller perfecto para tus diseños</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-primary-600 text-xl"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-green-600 bg-green-100 px-2 py-1 rounded">Activo</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1">2</h3>
+                    <p class="text-sm text-gray-600">Proyectos Activos</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-check-circle text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1">8</h3>
+                    <p class="text-sm text-gray-600">Proyectos Completados</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-industry text-amber-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1">5</h3>
+                    <p class="text-sm text-gray-600">Talleres Favoritos</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-star text-purple-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-1">4.9</h3>
+                    <p class="text-sm text-gray-600">Calificación Promedio</p>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <a href="buscar-talleres.html" class="gradient-bg rounded-xl p-6 card-hover cursor-pointer">
+                    <div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-search text-primary-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Buscar Talleres</h3>
+                    <p class="text-gray-600 text-sm">Encuentra el taller perfecto para tu próximo proyecto</p>
+                </a>
+
+                <a href="proyecto.html?nuevo=true" class="bg-white border-2 border-primary-200 rounded-xl p-6 card-hover cursor-pointer hover:border-primary-600">
+                    <div class="w-14 h-14 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-plus text-primary-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Nuevo Proyecto</h3>
+                    <p class="text-gray-600 text-sm">Crea una nueva solicitud de producción</p>
+                </a>
+
+                <a href="perfil-emprendedor.html" class="bg-white border-2 border-gray-200 rounded-xl p-6 card-hover cursor-pointer hover:border-primary-600">
+                    <div class="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-user-edit text-gray-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Mi Perfil</h3>
+                    <p class="text-gray-600 text-sm">Actualiza tu información y preferencias</p>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Proyectos Activos -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">Proyectos Activos</h2>
+                        <a href="#" class="text-primary-600 font-semibold hover:underline">Ver todos</a>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Proyecto 1 -->
+                        <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-1">Colección Primavera 2025 - Blusas</h3>
+                                    <p class="text-sm text-gray-600 mb-3">Confecciones María • 30 unidades</p>
+                                    <div class="flex items-center space-x-4 text-sm text-gray-600">
+                                        <span><i class="fas fa-calendar text-primary-600 mr-1"></i> Entrega: 10 Dic 2024</span>
+                                        <span><i class="fas fa-dollar-sign text-primary-600 mr-1"></i> $450,000 - $600,000</span>
+                                    </div>
+                                </div>
+                                <span class="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">En producción</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-sm mb-2">
+                                    <span class="text-gray-600 font-medium">Progreso</span>
+                                    <span class="font-bold text-primary-600">45%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-primary-600 to-accent-500 h-2 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-industry text-primary-600 text-xs"></i>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-700">Confecciones María</span>
+                                    <div class="flex items-center text-amber-500 text-xs">
+                                        <i class="fas fa-star"></i>
+                                        <span class="ml-1 text-gray-700">4.8</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="text-primary-600 hover:bg-primary-50 px-4 py-2 rounded-lg text-sm font-semibold">
+                                        <i class="fas fa-comment mr-1"></i> Mensajes
+                                    </button>
+                                    <a href="proyecto.html?id=1" class="text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-semibold">
+                                        Ver detalles
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 2 -->
+                        <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold text-gray-900 mb-1">Pantalones de lino - Nueva colección</h3>
+                                    <p class="text-sm text-gray-600 mb-3">40 unidades • Esperando propuestas</p>
+                                    <div class="flex items-center space-x-4 text-sm text-gray-600">
+                                        <span><i class="fas fa-calendar text-primary-600 mr-1"></i> Solicitado: 23 Nov 2024</span>
+                                        <span><i class="fas fa-dollar-sign text-primary-600 mr-1"></i> $600,000 - $800,000</span>
+                                    </div>
+                                </div>
+                                <span class="bg-amber-100 text-amber-700 text-xs font-semibold px-3 py-1 rounded-full">Buscando taller</span>
+                            </div>
+                            
+                            <div class="bg-purple-50 border border-purple-200 rounded-lg p-3 mb-4">
+                                <p class="text-sm text-purple-900"><i class="fas fa-paper-plane text-purple-600 mr-2"></i><strong>3 propuestas nuevas</strong> esperando tu revisión</p>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                                <div class="text-sm text-gray-600">
+                                    <i class="fas fa-industry text-primary-600 mr-1"></i> 8 talleres interesados
+                                </div>
+                                <div class="flex space-x-2">
+                                    <a href="#" class="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-700">
+                                        Ver propuestas
+                                    </a>
+                                    <a href="proyecto.html?id=4" class="text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-semibold">
+                                        Ver detalles
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proyectos Completados -->
+                    <div class="mt-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Proyectos Recientes</h2>
+                        <div class="space-y-3">
+                            <div class="bg-white rounded-lg p-4 shadow-sm flex items-center justify-between hover:shadow-md transition">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-check text-green-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Vestidos Verano 2024</h4>
+                                        <p class="text-sm text-gray-600">Modas y Diseños JL • 25 unidades</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs text-gray-500">Completado</p>
+                                    <p class="text-sm font-semibold text-gray-900">Nov 15, 2024</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg p-4 shadow-sm flex items-center justify-between hover:shadow-md transition">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-check text-green-600 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-900">Chaquetas de mezclilla</h4>
+                                        <p class="text-sm text-gray-600">Textiles del Norte • 50 unidades</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs text-gray-500">Completado</p>
+                                    <p class="text-sm font-semibold text-gray-900">Oct 28, 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div>
+                    <!-- Notificaciones -->
+                    <div class="bg-white rounded-xl p-6 shadow-sm mb-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Notificaciones</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-info text-white text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900">Actualización de proyecto</p>
+                                    <p class="text-xs text-gray-600 mt-1">Confecciones María actualizó el progreso a 45%</p>
+                                    <p class="text-xs text-gray-500 mt-1">Hace 2 horas</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 bg-purple-50 rounded-lg">
+                                <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-file-alt text-white text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900">Nueva propuesta</p>
+                                    <p class="text-xs text-gray-600 mt-1">Textiles del Norte envió una propuesta</p>
+                                    <p class="text-xs text-gray-500 mt-1">Hace 5 horas</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg">
+                                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-comment text-white text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-gray-900">Nuevo mensaje</p>
+                                    <p class="text-xs text-gray-600 mt-1">María García te envió un mensaje</p>
+                                    <p class="text-xs text-gray-500 mt-1">Ayer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 text-primary-600 font-semibold text-sm hover:underline">
+                            Ver todas las notificaciones
+                        </button>
+                    </div>
+
+                    <!-- Talleres Recomendados -->
+                    <div class="bg-white rounded-xl p-6 shadow-sm">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">Talleres Recomendados</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-600 transition cursor-pointer">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-900">Confecciones El Éxito</h4>
+                                    <div class="flex items-center text-amber-500 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <span class="ml-1 text-gray-700">4.8</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-2">Blusas • Faldas • Vestidos</p>
+                                <p class="text-xs text-gray-500">Atalaya, Cúcuta</p>
+                                <div class="flex items-center mt-3 space-x-2">
+                                    <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Taller Oro</span>
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Disponible</span>
+                                </div>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-600 transition cursor-pointer">
+                                <div class="flex items-start justify-between mb-2">
+                                    <h4 class="font-semibold text-gray-900">Creaciones Sofía</h4>
+                                    <div class="flex items-center text-amber-500 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <span class="ml-1 text-gray-700">5.0</span>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-2">Ropa infantil • Accesorios</p>
+                                <p class="text-xs text-gray-500">Atalaya, Cúcuta</p>
+                                <div class="flex items-center mt-3 space-x-2">
+                                    <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Taller Oro</span>
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">Disponible</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="buscar-talleres.html" class="w-full mt-4 block text-center text-primary-600 font-semibold text-sm hover:underline">
+                            Ver más talleres
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/data/mock-data.js"></script>
+    <script>
+        // Logout functionality
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        }
+
+        // Check if user is logged in
+        if (!localStorage.getItem('userRole')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

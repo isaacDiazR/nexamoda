@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Emprendedor - NexaModa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#6b21a8',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#3d1158'
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#d4af37',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            800: '#854d0e',
+                            900: '#674e11'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
+                        NexaModa
+                    </h1>
+                    <nav class="hidden md:flex space-x-6">
+                        <a href="buscar-talleres.html" class="text-gray-600 hover:text-primary-600 transition">Buscar Talleres</a>
+                        <a href="dashboard-emprendedor.html" class="text-gray-600 hover:text-primary-600 transition">Mi Dashboard</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative text-gray-600 hover:text-primary-600">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">3</span>
+                    </button>
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2 text-gray-700 hover:text-primary-600">
+                            <img src="https://ui-avatars.com/api/?name=Usuario&background=6b21a8&color=fff" alt="Usuario" class="w-8 h-8 rounded-full">
+                            <i class="fas fa-chevron-down text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Botón Volver -->
+        <div class="mb-6">
+            <button onclick="window.history.back()" class="inline-flex items-center text-gray-600 hover:text-primary-600 transition">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Volver
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Columna Principal -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Información Principal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <!-- Banner -->
+                    <div class="h-48 bg-gradient-to-r from-primary-600 to-accent-500 relative">
+                        <div class="absolute -bottom-16 left-8">
+                            <div class="w-32 h-32 rounded-full bg-white p-2 shadow-lg">
+                                <img id="emprendedorAvatar" src="https://ui-avatars.com/api/?name=Emprendedor&background=6b21a8&color=fff&size=128" alt="Avatar" class="w-full h-full rounded-full">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Info y Acciones -->
+                    <div class="pt-20 px-8 pb-6">
+                        <div class="flex flex-col md:flex-row md:items-start md:justify-between">
+                            <div class="flex-1">
+                                <h2 id="emprendedorNombre" class="text-3xl font-bold text-gray-900 mb-2">Ana García</h2>
+                                <p id="marcaNombre" class="text-xl text-primary-600 font-semibold mb-2">Urban Style</p>
+                                <div class="flex items-center space-x-4 text-gray-600 mb-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-map-marker-alt mr-2 text-primary-600"></i>
+                                        <span id="emprendedorUbicacion">Cúcuta, Colombia</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-accent-500 mr-1"></i>
+                                        <span id="emprendedorRating" class="font-semibold">4.9</span>
+                                        <span class="text-gray-400 ml-1">(<span id="emprendedorReviews">45</span> reseñas)</span>
+                                    </div>
+                                </div>
+                                <p id="emprendedorBio" class="text-gray-600 mb-4">
+                                    Diseñadora de moda especializada en ropa urbana contemporánea. Apasionada por crear piezas únicas 
+                                    que combinan estilo, comodidad y sostenibilidad.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">Verificado</span>
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Activo</span>
+                                    <span class="px-3 py-1 bg-accent-100 text-accent-700 rounded-full text-sm">Miembro desde 2023</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col space-y-3 mt-4 md:mt-0 md:ml-6">
+                                <button class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-semibold shadow-lg hover:shadow-xl">
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    Enviar Mensaje
+                                </button>
+                                <button class="px-6 py-3 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition font-semibold">
+                                    <i class="fas fa-user-plus mr-2"></i>
+                                    Conectar
+                                </button>
+                                <button class="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-semibold">
+                                    <i class="fas fa-share-alt mr-2"></i>
+                                    Compartir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sobre la Marca -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-building text-primary-600 mr-3"></i>
+                        Sobre la Marca
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Descripción</h4>
+                            <p class="text-gray-600">
+                                Urban Style es una marca de moda urbana que busca revolucionar el streetwear con diseños 
+                                innovadores y sostenibles. Nos enfocamos en crear prendas de alta calidad que reflejan 
+                                la personalidad de la nueva generación.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Especialidades</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm">Ropa Urbana</span>
+                                <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm">Streetwear</span>
+                                <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm">Casual</span>
+                                <span class="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm">Unisex</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Valores</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                                    <i class="fas fa-leaf text-green-600 mr-2"></i>
+                                    <span class="text-gray-900">Sostenibilidad</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                                    <i class="fas fa-award text-blue-600 mr-2"></i>
+                                    <span class="text-gray-900">Calidad</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-purple-50 rounded-lg">
+                                    <i class="fas fa-lightbulb text-purple-600 mr-2"></i>
+                                    <span class="text-gray-900">Innovación</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portafolio/Colecciones -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center justify-between">
+                        <span>
+                            <i class="fas fa-images text-primary-600 mr-3"></i>
+                            Portafolio de Diseños
+                        </span>
+                        <button class="text-primary-600 hover:text-primary-700 text-sm font-semibold">Ver todo</button>
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400" alt="Diseño 1" class="w-full aspect-square object-cover group-hover:scale-110 transition duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-semibold">Colección Primavera</h4>
+                                    <p class="text-gray-200 text-sm">20 diseños</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400" alt="Diseño 2" class="w-full aspect-square object-cover group-hover:scale-110 transition duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-semibold">Urban Nights</h4>
+                                    <p class="text-gray-200 text-sm">15 diseños</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400" alt="Diseño 3" class="w-full aspect-square object-cover group-hover:scale-110 transition duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-semibold">Minimal Collection</h4>
+                                    <p class="text-gray-200 text-sm">12 diseños</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1562572159-4efc207f5aff?w=400" alt="Diseño 4" class="w-full aspect-square object-cover group-hover:scale-110 transition duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-semibold">Street Essentials</h4>
+                                    <p class="text-gray-200 text-sm">18 diseños</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1595341888016-a392ef81b7de?w=400" alt="Diseño 5" class="w-full aspect-square object-cover group-hover:scale-110 transition duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-semibold">Color Pop</h4>
+                                    <p class="text-gray-200 text-sm">10 diseños</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg">
+                            <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400" alt="Diseño 6" class="w-full aspect-square object-cover group-hover:scale-110 transition duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition">
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    <h4 class="text-white font-semibold">Ver más</h4>
+                                    <p class="text-gray-200 text-sm">+25 colecciones</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyectos Recientes -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center justify-between">
+                        <span>
+                            <i class="fas fa-folder-open text-primary-600 mr-3"></i>
+                            Proyectos Recientes
+                        </span>
+                        <button class="text-primary-600 hover:text-primary-700 text-sm font-semibold">Ver todos</button>
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- Proyecto 1 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition cursor-pointer">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-gray-900 mb-1">Colección Verano 2024</h4>
+                                    <p class="text-sm text-gray-600">50 prendas casual urbanas</p>
+                                </div>
+                                <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">En Producción</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600 mb-3">
+                                <i class="fas fa-industry mr-2 text-primary-600"></i>
+                                <span>Confecciones María</span>
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-calendar mr-2"></i>
+                                <span>Entrega: 15 días</span>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-600">Progreso</span>
+                                    <span class="font-semibold text-primary-600">45%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-primary-600 h-2 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto 2 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition cursor-pointer">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-gray-900 mb-1">Hoodies Premium</h4>
+                                    <p class="text-sm text-gray-600">30 unidades personalizadas</p>
+                                </div>
+                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Completado</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-600 mb-3">
+                                <i class="fas fa-industry mr-2 text-primary-600"></i>
+                                <span>Textiles del Norte</span>
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-check-circle mr-2 text-green-600"></i>
+                                <span>Entregado hace 5 días</span>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-600">Progreso</span>
+                                    <span class="font-semibold text-green-600">100%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-600 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reseñas -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center justify-between">
+                        <span>
+                            <i class="fas fa-star text-accent-500 mr-3"></i>
+                            Reseñas de Talleres
+                        </span>
+                        <button class="text-primary-600 hover:text-primary-700 text-sm font-semibold">Ver todas</button>
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-200 pb-4">
+                            <div class="flex items-start mb-2">
+                                <img src="https://ui-avatars.com/api/?name=Confecciones+Maria&background=6b21a8&color=fff" alt="Taller" class="w-10 h-10 rounded-full mr-3">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Confecciones María</h4>
+                                            <div class="flex items-center mt-1">
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <span class="text-gray-600 text-sm ml-2">Hace 1 semana</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 mt-2 text-sm">
+                                        Excelente calidad y atención al detalle. Cumplieron con los tiempos y superaron mis expectativas. 
+                                        Definitivamente seguiré trabajando con ellos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pb-4">
+                            <div class="flex items-start mb-2">
+                                <img src="https://ui-avatars.com/api/?name=Textiles+Norte&background=d4af37&color=fff" alt="Taller" class="w-10 h-10 rounded-full mr-3">
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900">Textiles del Norte</h4>
+                                            <div class="flex items-center mt-1">
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <i class="fas fa-star text-accent-500 text-sm"></i>
+                                                <span class="text-gray-600 text-sm ml-2">Hace 2 semanas</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-600 mt-2 text-sm">
+                                        Muy profesionales y comprometidos. La comunicación fue fluida durante todo el proceso. 
+                                        Altamente recomendados.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Información de Contacto -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Información de Contacto</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope text-primary-600 mt-1 mr-3"></i>
+                            <div>
+                                <div class="text-sm text-gray-600">Email</div>
+                                <div class="font-semibold text-gray-900">ana@urbanstyle.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-phone text-primary-600 mt-1 mr-3"></i>
+                            <div>
+                                <div class="text-sm text-gray-600">Teléfono</div>
+                                <div class="font-semibold text-gray-900">+57 315 234 5678</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-globe text-primary-600 mt-1 mr-3"></i>
+                            <div>
+                                <div class="text-sm text-gray-600">Sitio web</div>
+                                <div class="font-semibold text-primary-600">urbanstyle.co</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <h4 class="text-sm font-semibold text-gray-900 mb-3">Redes Sociales</h4>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estadísticas -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Estadísticas</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Proyectos activos</span>
+                            <span class="font-bold text-gray-900">2</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Proyectos completados</span>
+                            <span class="font-bold text-gray-900">8</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Talleres colaboradores</span>
+                            <span class="font-bold text-gray-900">5</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Tasa de éxito</span>
+                            <span class="font-bold text-green-600">98%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Miembro desde</span>
+                            <span class="font-bold text-gray-900">2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intereses y Preferencias -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Intereses</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Streetwear</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Moda Sostenible</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Diseño</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Producción Local</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">Innovación</span>
+                    </div>
+                </div>
+
+                <!-- Logros y Badges -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Logros</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-accent-50 rounded-lg">
+                            <i class="fas fa-trophy text-accent-500 text-2xl mr-3"></i>
+                            <div>
+                                <div class="font-semibold text-gray-900">Top Emprendedor</div>
+                                <div class="text-sm text-gray-600">10+ proyectos exitosos</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-primary-50 rounded-lg">
+                            <i class="fas fa-star text-primary-600 text-2xl mr-3"></i>
+                            <div>
+                                <div class="font-semibold text-gray-900">Valoración Excelente</div>
+                                <div class="text-sm text-gray-600">4.9+ estrellas</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                            <i class="fas fa-check-circle text-green-600 text-2xl mr-3"></i>
+                            <div>
+                                <div class="font-semibold text-gray-900">Perfil Verificado</div>
+                                <div class="text-sm text-gray-600">Cuenta verificada</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emprendedores Similares -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4">Emprendedores Similares</h3>
+                    <div class="space-y-3">
+                        <a href="#" class="block p-3 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <img src="https://ui-avatars.com/api/?name=Carlos+Lopez&background=6b21a8&color=fff" alt="Emprendedor" class="w-12 h-12 rounded-full mr-3">
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-900">Carlos López</div>
+                                    <div class="text-sm text-gray-600">ModaCL Fashion</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="block p-3 hover:bg-gray-50 rounded-lg transition">
+                            <div class="flex items-center">
+                                <img src="https://ui-avatars.com/api/?name=Maria+Torres&background=d4af37&color=fff" alt="Emprendedor" class="w-12 h-12 rounded-full mr-3">
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-900">María Torres</div>
+                                    <div class="text-sm text-gray-600">Eleganza</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/data/mock-data.js"></script>
+    <script>
+        // Obtener ID del emprendedor desde URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const emprendedorId = urlParams.get('id') || '1';
+
+        // Cargar información del emprendedor
+        function cargarEmprendedor() {
+            const emprendedor = mockData.emprendedores.find(e => e.id === emprendedorId) || mockData.emprendedores[0];
+            
+            document.getElementById('emprendedorNombre').textContent = emprendedor.nombre;
+            document.getElementById('marcaNombre').textContent = emprendedor.marca;
+            document.getElementById('emprendedorUbicacion').textContent = emprendedor.ubicacion || 'Cúcuta, Colombia';
+            document.getElementById('emprendedorRating').textContent = emprendedor.rating || '4.9';
+            document.getElementById('emprendedorReviews').textContent = emprendedor.reviews || '45';
+            document.getElementById('emprendedorBio').textContent = emprendedor.descripcion || 'Emprendedor apasionado por la moda y el diseño.';
+            document.getElementById('emprendedorAvatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(emprendedor.nombre)}&background=6b21a8&color=fff&size=128`;
+        }
+
+        // Cargar datos al iniciar
+        cargarEmprendedor();
+    </script>
+</body>
+</html>

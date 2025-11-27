@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexaModa - Impulsamos tu visión, vestimos tu futuro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#6b21a8',
+                            700: '#5b1a8c',
+                            800: '#4c1570',
+                            900: '#3d1158',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#d4af37',
+                            600: '#b8941f',
+                            700: '#9d7c1a',
+                            800: '#826515',
+                            900: '#674e11',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #6b21a8 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f3e8ff 0%, #fef9c3 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(107, 33, 168, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900">
+    
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-scissors text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">NexaModa</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-gray-700 hover:text-primary-600 font-medium transition">Inicio</a>
+                    <a href="#como-funciona" class="text-gray-700 hover:text-primary-600 font-medium transition">Cómo funciona</a>
+                    <a href="#talleres" class="text-gray-700 hover:text-primary-600 font-medium transition">Para Talleres</a>
+                    <a href="#emprendedores" class="text-gray-700 hover:text-primary-600 font-medium transition">Para Emprendedores</a>
+                    <a href="login.html" class="text-gray-700 hover:text-primary-600 font-medium transition">Iniciar Sesión</a>
+                    <a href="registro-emprendedor.html" class="bg-gradient-to-r from-primary-600 to-accent-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+                        Registrarse
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-primary-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden nav-blur border-t border-gray-200">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#inicio" class="block text-gray-700 hover:text-primary-600 font-medium transition">Inicio</a>
+                <a href="#como-funciona" class="block text-gray-700 hover:text-primary-600 font-medium transition">Cómo funciona</a>
+                <a href="#talleres" class="block text-gray-700 hover:text-primary-600 font-medium transition">Para Talleres</a>
+                <a href="#emprendedores" class="block text-gray-700 hover:text-primary-600 font-medium transition">Para Emprendedores</a>
+                <a href="#login" class="block text-gray-700 hover:text-primary-600 font-medium transition">Iniciar Sesión</a>
+                <a href="#registro" class="block bg-gradient-to-r from-primary-600 to-accent-500 text-white px-6 py-3 rounded-lg font-semibold text-center">
+                    Registrarse
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-32 pb-20 px-4 hero-pattern">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-8">
+                    <div class="inline-block">
+                        <span class="bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold">
+                            🚀 Conectando talento en Cúcuta
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                        <span class="gradient-text">Impulsamos tu visión,</span>
+                        <br>
+                        <span class="text-gray-900">vestimos tu futuro</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-600 leading-relaxed">
+                        La plataforma que conecta emprendedores de moda con talleres de confección en Cúcuta. 
+                        <span class="font-semibold text-gray-900">Producción transparente, confiable y sin pedidos mínimos.</span>
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#registro" class="bg-gradient-to-r from-primary-600 to-accent-500 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition transform hover:scale-105 text-center">
+                            Comenzar Ahora
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#como-funciona" class="border-2 border-primary-600 text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-primary-50 transition text-center">
+                            ¿Cómo funciona?
+                        </a>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 pt-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text">2,872</div>
+                            <div class="text-sm text-gray-600 mt-1">Talleres en Cúcuta</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text">100%</div>
+                            <div class="text-sm text-gray-600 mt-1">Verificados</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold gradient-text">4.8★</div>
+                            <div class="text-sm text-gray-600 mt-1">Satisfacción</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Image -->
+                <div class="relative">
+                    <div class="float-animation">
+                        <div class="relative z-10">
+                            <!-- Usa tu imagen local: images/hero-taller.jpg -->
+                            <img src="images/hero-taller.jpg" 
+                                 onerror="this.src='https://images.unsplash.com/photo-1558769132-cb1aea0f034d?w=800&q=80'" 
+                                 alt="Taller de confección" 
+                                 class="rounded-2xl shadow-2xl w-full h-auto object-cover">
+                        </div>
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="absolute -top-4 -right-4 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+                    <div class="absolute -bottom-8 -left-4 w-72 h-72 bg-accent-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style="animation-delay: 2s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cómo Funciona -->
+    <section id="como-funciona" class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">¿Cómo funciona?</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Tres simples pasos para conectar tu visión con el taller perfecto
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="relative card-hover bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                    <div class="absolute -top-6 left-8">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-accent-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            1
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-user-plus text-primary-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Crea tu perfil</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Regístrate como emprendedor o taller. Completa tu información y verifica tu cuenta en minutos.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="relative card-hover bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                    <div class="absolute -top-6 left-8">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-accent-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            2
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-handshake text-primary-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Conecta</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Publica tu proyecto o explora talleres verificados. Recibe cotizaciones transparentes y elige el mejor match.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="relative card-hover bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                    <div class="absolute -top-6 left-8">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-600 to-accent-500 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                            3
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-rocket text-primary-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">¡Produce!</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Coordina tu producción con comunicación directa. Recibe tu pedido con calidad garantizada y deja tu reseña.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios Split Section -->
+    <section class="py-20 px-4 gradient-bg">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12">
+                
+                <!-- Para Emprendedores -->
+                <div id="emprendedores" class="bg-white rounded-2xl p-10 shadow-lg card-hover">
+                    <!-- Imagen opcional para emprendedores -->
+                    <div class="mb-6 -mt-10 -mx-10 rounded-t-2xl overflow-hidden">
+                        <img src="images/emprendedor.jpg" 
+                             onerror="this.src='https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&q=80'" 
+                             alt="Emprendedor de moda" 
+                             class="w-full h-48 object-cover">
+                    </div>
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-accent-500 rounded-xl flex items-center justify-center mb-6 -mt-8 relative z-10">
+                        <i class="fas fa-lightbulb text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6">Para Emprendedores</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Sin pedidos mínimos</div>
+                                <div class="text-gray-600">Produce desde 1 unidad hasta grandes volúmenes</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Talleres verificados</div>
+                                <div class="text-gray-600">Todos los talleres pasan por un proceso de validación</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Precios transparentes</div>
+                                <div class="text-gray-600">Cotizaciones claras sin sorpresas</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Comunicación directa</div>
+                                <div class="text-gray-600">Chat integrado para coordinar todos los detalles</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Reseñas verificadas</div>
+                                <div class="text-gray-600">Decide con confianza basándote en experiencias reales</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#registro" class="mt-8 inline-block bg-gradient-to-r from-primary-600 to-accent-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+                        Empezar como Emprendedor
+                    </a>
+                </div>
+                
+                <!-- Para Talleres -->
+                <div id="talleres" class="bg-white rounded-2xl p-10 shadow-lg card-hover">
+                    <!-- Imagen opcional para talleres -->
+                    <div class="mb-6 -mt-10 -mx-10 rounded-t-2xl overflow-hidden">
+                        <img src="images/taller.jpg" 
+                             onerror="this.src='https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=80'" 
+                             alt="Taller de confección" 
+                             class="w-full h-48 object-cover">
+                    </div>
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-accent-500 rounded-xl flex items-center justify-center mb-6 -mt-8 relative z-10">
+                        <i class="fas fa-industry text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-6">Para Talleres</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Mayor visibilidad</div>
+                                <div class="text-gray-600">Llega a emprendedores que buscan justo tus servicios</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Flujo constante de trabajo</div>
+                                <div class="text-gray-600">Accede a proyectos nuevos todos los días</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Construye reputación</div>
+                                <div class="text-gray-600">Sistema de calificaciones para destacar tu calidad</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Gestión simplificada</div>
+                                <div class="text-gray-600">Organiza tus proyectos desde un solo lugar</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary-600 text-xl mr-3 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-lg">Sin comisiones iniciales</div>
+                                <div class="text-gray-600">Regístrate y cotiza gratis</div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#registro" class="mt-8 inline-block bg-gradient-to-r from-primary-600 to-accent-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+                        Registrar mi Taller
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="py-20 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">Lo que dicen nuestros usuarios</span>
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Experiencias reales de emprendedores y talleres en Cúcuta
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gradient-bg rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            M
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-bold text-lg">María González</div>
+                            <div class="text-gray-600 text-sm">Emprendedora de Moda</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "Gracias a NexaModa pude producir mi primera colección con solo 20 unidades. 
+                        Encontré un taller increíble que entendió mi visión y la calidad superó mis expectativas."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gradient-bg rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            J
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-bold text-lg">Jorge Ramírez</div>
+                            <div class="text-gray-600 text-sm">Taller "Confecciones JR"</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "Como taller pequeño era difícil conseguir clientes. Ahora tengo trabajo constante 
+                        y he podido crecer mi negocio. La plataforma es muy fácil de usar."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gradient-bg rounded-2xl p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            L
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-bold text-lg">Laura Medina</div>
+                            <div class="text-gray-600 text-sm">Diseñadora Independiente</div>
+                        </div>
+                    </div>
+                    <div class="flex mb-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "La transparencia en precios y tiempos me da tranquilidad. Puedo planificar mejor 
+                        mis colecciones y mis clientes están felices con los resultados."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estadísticas -->
+    <section class="py-20 px-4 bg-gradient-to-r from-primary-600 to-accent-500 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-5xl font-bold mb-2">2,872</div>
+                    <div class="text-primary-100 text-lg">Talleres Disponibles</div>
+                    <div class="text-primary-200 text-sm mt-1">En toda Cúcuta</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold mb-2">500+</div>
+                    <div class="text-primary-100 text-lg">Proyectos Completados</div>
+                    <div class="text-primary-200 text-sm mt-1">Con éxito</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold mb-2">4.8/5</div>
+                    <div class="text-primary-100 text-lg">Calificación Promedio</div>
+                    <div class="text-primary-200 text-sm mt-1">De satisfacción</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold mb-2">98%</div>
+                    <div class="text-primary-100 text-lg">Entregas a Tiempo</div>
+                    <div class="text-primary-200 text-sm mt-1">Cumplimiento garantizado</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final con Registro -->
+    <section id="registro" class="py-20 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-gradient-bg rounded-3xl p-12 text-center shadow-xl">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    <span class="gradient-text">Comienza hoy mismo</span>
+                </h2>
+                <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
+                    Únete a la comunidad de moda en Cúcuta. Crea tu cuenta en menos de 2 minutos.
+                </p>
+                
+                <!-- Quick Register Form -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg max-w-md mx-auto">
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <button class="border-2 border-primary-600 bg-primary-50 text-primary-600 px-6 py-4 rounded-lg font-semibold hover:bg-primary-100 transition">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            Emprendedor
+                        </button>
+                        <button class="border-2 border-gray-300 text-gray-600 px-6 py-4 rounded-lg font-semibold hover:border-primary-600 hover:text-primary-600 transition">
+                            <i class="fas fa-industry mr-2"></i>
+                            Taller
+                        </button>
+                    </div>
+                    
+                    <form class="space-y-4">
+                        <input type="text" placeholder="Nombre completo" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition">
+                        <input type="email" placeholder="Correo electrónico" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition">
+                        <input type="tel" placeholder="Teléfono" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition">
+                        <input type="password" placeholder="Contraseña" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition">
+                        
+                        <div class="flex items-start">
+                            <input type="checkbox" id="terms" class="mt-1 mr-2">
+                            <label for="terms" class="text-sm text-gray-600 text-left">
+                                Acepto los <a href="#" class="text-primary-600 hover:underline">términos y condiciones</a> 
+                                y la <a href="#" class="text-primary-600 hover:underline">política de privacidad</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary-600 to-accent-500 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+                            Crear Cuenta Gratis
+                        </button>
+                    </form>
+                    
+                    <div class="mt-6">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-white text-gray-500">O continuar con</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 grid grid-cols-2 gap-3">
+                            <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                                <i class="fab fa-google text-red-500 mr-2"></i>
+                                Google
+                            </button>
+                            <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                                <i class="fab fa-facebook text-blue-600 mr-2"></i>
+                                Facebook
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-6 text-gray-600 text-sm">
+                        ¿Ya tienes cuenta? 
+                        <a href="#login" class="text-primary-600 font-semibold hover:underline">Inicia sesión</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-scissors text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold text-white">NexaModa</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Conectando emprendedores con talleres de confección en Cúcuta.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-4">Plataforma</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#como-funciona" class="hover:text-primary-400 transition">Cómo funciona</a></li>
+                        <li><a href="#emprendedores" class="hover:text-primary-400 transition">Para Emprendedores</a></li>
+                        <li><a href="#talleres" class="hover:text-primary-400 transition">Para Talleres</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Precios</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Casos de éxito</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Support -->
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-4">Soporte</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary-400 transition">Centro de ayuda</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Preguntas frecuentes</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Contacto</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Estado del servicio</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Reportar problema</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h4 class="text-white font-semibold text-lg mb-4">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary-400 transition">Términos y condiciones</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Política de privacidad</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Política de cookies</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition">Aviso legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                        © 2025 NexaModa. Todos los derechos reservados. Hecho con ❤️ en Cúcuta, Colombia.
+                    </p>
+                    <div class="flex items-center space-x-4 text-sm">
+                        <span class="text-gray-500">Desarrollado por:</span>
+                        <span class="text-gray-400">Fernanda Uribe • Nicole Gomez • Angélica Jaimes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-blur', 'shadow-md');
+            } else {
+                navbar.classList.remove('nav-blur', 'shadow-md');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form role selection toggle
+        const roleButtons = document.querySelectorAll('.grid button');
+        roleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                roleButtons.forEach(btn => {
+                    btn.classList.remove('border-primary-600', 'bg-primary-50', 'text-primary-600');
+                    btn.classList.add('border-gray-300', 'text-gray-600');
+                });
+                this.classList.remove('border-gray-300', 'text-gray-600');
+                this.classList.add('border-primary-600', 'bg-primary-50', 'text-primary-600');
+            });
+        });
+    </script>
+</body>
+</html>

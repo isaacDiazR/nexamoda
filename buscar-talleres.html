@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Talleres - NexaModa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#6b21a8',
+                            700: '#5b1a8c',
+                            800: '#4c1570',
+                            900: '#3d1158',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#d4af37',
+                            600: '#b8941f',
+                            700: '#9d7c1a',
+                            800: '#826515',
+                            900: '#674e11',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #6b21a8 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f3e8ff 0%, #fef9c3 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(107, 33, 168, 0.1);
+        }
+
+        .filter-chip {
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip.active {
+            background: linear-gradient(135deg, #6b21a8 0%, #a855f7 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-scissors text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold gradient-text">NexaModa</span>
+                    </a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="dashboard-emprendedor.html" class="text-gray-600 hover:text-primary-600 py-2">Inicio</a>
+                        <a href="#" class="text-primary-600 font-semibold border-b-2 border-primary-600 py-2">Buscar Talleres</a>
+                        <a href="#" class="text-gray-600 hover:text-primary-600 py-2">Mis Proyectos</a>
+                        <a href="#" class="text-gray-600 hover:text-primary-600 py-2">Mensajes</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="relative text-gray-600 hover:text-primary-600">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center">3</span>
+                    </button>
+                    <div class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div class="hidden md:block">
+                            <p class="text-sm font-semibold text-gray-900">Laura Martínez</p>
+                            <p class="text-xs text-gray-500">Emprendedor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-20 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Buscar Talleres</h1>
+                <p class="text-gray-600">Encuentra el taller perfecto para tu próximo proyecto en Cúcuta</p>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="bg-white rounded-xl p-6 shadow-sm mb-8">
+                <!-- Search Bar -->
+                <div class="mb-6">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl outline-none focus:border-primary-600 transition"
+                            placeholder="Buscar por nombre, especialidad o ubicación..."
+                        >
+                    </div>
+                </div>
+
+                <!-- Filter Chips -->
+                <div class="mb-4">
+                    <p class="text-sm font-semibold text-gray-700 mb-3">Especialidades:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="filter-chip px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-primary-600 hover:text-white" data-filter="Ropa casual">
+                            Ropa casual
+                        </button>
+                        <button class="filter-chip px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-primary-600 hover:text-white" data-filter="Ropa formal">
+                            Ropa formal
+                        </button>
+                        <button class="filter-chip px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-primary-600 hover:text-white" data-filter="Vestidos">
+                            Vestidos
+                        </button>
+                        <button class="filter-chip px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-primary-600 hover:text-white" data-filter="Ropa deportiva">
+                            Ropa deportiva
+                        </button>
+                        <button class="filter-chip px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-primary-600 hover:text-white" data-filter="Ropa infantil">
+                            Ropa infantil
+                        </button>
+                        <button class="filter-chip px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-primary-600 hover:text-white" data-filter="Uniformes">
+                            Uniformes
+                        </button>
+                        <button class="filter-chip px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-primary-600 hover:text-white" data-filter="Bordados">
+                            Bordados
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Advanced Filters -->
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Ubicación</label>
+                        <select class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg outline-none focus:border-primary-600">
+                            <option value="">Todas</option>
+                            <option value="Atalaya">Atalaya</option>
+                            <option value="Centro">Centro</option>
+                            <option value="La Libertad">La Libertad</option>
+                            <option value="San Luis">San Luis</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Pedido mínimo</label>
+                        <select class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg outline-none focus:border-primary-600">
+                            <option value="">Cualquiera</option>
+                            <option value="10">Hasta 10 unidades</option>
+                            <option value="20">Hasta 20 unidades</option>
+                            <option value="30">Hasta 30 unidades</option>
+                            <option value="50">Hasta 50 unidades</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Calificación mínima</label>
+                        <select class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg outline-none focus:border-primary-600">
+                            <option value="">Todas</option>
+                            <option value="4.5">4.5+ estrellas</option>
+                            <option value="4.0">4.0+ estrellas</option>
+                            <option value="3.5">3.5+ estrellas</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Disponibilidad</label>
+                        <select class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg outline-none focus:border-primary-600">
+                            <option value="">Todos</option>
+                            <option value="disponible">Solo disponibles</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between">
+                    <button class="text-primary-600 font-semibold text-sm hover:underline">
+                        Limpiar filtros
+                    </button>
+                    <p class="text-sm text-gray-600"><span class="font-bold" id="resultCount">6</span> talleres encontrados</p>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="talleresContainer">
+                
+                <!-- Taller Card 1 -->
+                <div class="bg-white rounded-xl shadow-sm card-hover overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Confecciones María</h3>
+                                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-primary-600 mr-1"></i> Atalaya, Cúcuta</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="far fa-heart text-2xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center text-amber-500 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-900">4.8</span>
+                            <span class="text-sm text-gray-600 ml-1">(24 reseñas)</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Ropa casual</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Camisas</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Pantalones</span>
+                        </div>
+
+                        <div class="space-y-2 mb-4 text-sm text-gray-600">
+                            <p><i class="fas fa-box text-primary-600 mr-2"></i> Pedido mínimo: <strong>20 unidades</strong></p>
+                            <p><i class="fas fa-clock text-primary-600 mr-2"></i> Entrega: <strong>15-20 días</strong></p>
+                            <p><i class="fas fa-dollar-sign text-primary-600 mr-2"></i> <strong>$15,000 - $25,000</strong> / prenda</p>
+                        </div>
+
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded font-semibold">🏆 Taller Oro</span>
+                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-semibold">✓ Disponible</span>
+                        </div>
+
+                        <p class="text-sm text-gray-600 mb-4">Taller familiar con 15 años de experiencia en confección de prendas casuales...</p>
+
+                        <div class="flex space-x-2">
+                            <a href="perfil-taller.html?id=1" class="flex-1 bg-primary-600 text-white py-2 rounded-lg text-center font-semibold hover:bg-primary-700 transition">
+                                Ver Perfil
+                            </a>
+                            <button class="px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taller Card 2 -->
+                <div class="bg-white rounded-xl shadow-sm card-hover overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Modas y Diseños JL</h3>
+                                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-primary-600 mr-1"></i> Centro, Cúcuta</p>
+                            </div>
+                            <button class="text-red-500">
+                                <i class="fas fa-heart text-2xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center text-amber-500 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-900">4.9</span>
+                            <span class="text-sm text-gray-600 ml-1">(31 reseñas)</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Vestidos</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Ropa formal</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Bordados</span>
+                        </div>
+
+                        <div class="space-y-2 mb-4 text-sm text-gray-600">
+                            <p><i class="fas fa-box text-primary-600 mr-2"></i> Pedido mínimo: <strong>15 unidades</strong></p>
+                            <p><i class="fas fa-clock text-primary-600 mr-2"></i> Entrega: <strong>20-25 días</strong></p>
+                            <p><i class="fas fa-dollar-sign text-primary-600 mr-2"></i> <strong>$25,000 - $45,000</strong> / prenda</p>
+                        </div>
+
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded font-semibold">🏆 Taller Oro</span>
+                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-semibold">✓ Disponible</span>
+                        </div>
+
+                        <p class="text-sm text-gray-600 mb-4">Especialistas en vestidos de alta calidad y bordados personalizados...</p>
+
+                        <div class="flex space-x-2">
+                            <a href="perfil-taller.html?id=2" class="flex-1 bg-primary-600 text-white py-2 rounded-lg text-center font-semibold hover:bg-primary-700 transition">
+                                Ver Perfil
+                            </a>
+                            <button class="px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taller Card 3 -->
+                <div class="bg-white rounded-xl shadow-sm card-hover overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Textiles del Norte</h3>
+                                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-primary-600 mr-1"></i> La Libertad, Cúcuta</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="far fa-heart text-2xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center text-amber-500 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-900">4.6</span>
+                            <span class="text-sm text-gray-600 ml-1">(19 reseñas)</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Ropa deportiva</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Uniformes</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Camisetas</span>
+                        </div>
+
+                        <div class="space-y-2 mb-4 text-sm text-gray-600">
+                            <p><i class="fas fa-box text-primary-600 mr-2"></i> Pedido mínimo: <strong>50 unidades</strong></p>
+                            <p><i class="fas fa-clock text-primary-600 mr-2"></i> Entrega: <strong>10-15 días</strong></p>
+                            <p><i class="fas fa-dollar-sign text-primary-600 mr-2"></i> <strong>$12,000 - $18,000</strong> / prenda</p>
+                        </div>
+
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded font-semibold">⚡ Entrega Rápida</span>
+                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-semibold">✓ Disponible</span>
+                        </div>
+
+                        <p class="text-sm text-gray-600 mb-4">Taller con capacidad para grandes volúmenes. Especialistas en ropa deportiva...</p>
+
+                        <div class="flex space-x-2">
+                            <a href="perfil-taller.html?id=3" class="flex-1 bg-primary-600 text-white py-2 rounded-lg text-center font-semibold hover:bg-primary-700 transition">
+                                Ver Perfil
+                            </a>
+                            <button class="px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taller Card 4 -->
+                <div class="bg-white rounded-xl shadow-sm card-hover overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Creaciones Sofía</h3>
+                                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-primary-600 mr-1"></i> Atalaya, Cúcuta</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="far fa-heart text-2xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center text-amber-500 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-900">5.0</span>
+                            <span class="text-sm text-gray-600 ml-1">(15 reseñas)</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Ropa infantil</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Ropa de bebé</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Accesorios</span>
+                        </div>
+
+                        <div class="space-y-2 mb-4 text-sm text-gray-600">
+                            <p><i class="fas fa-box text-primary-600 mr-2"></i> Pedido mínimo: <strong>25 unidades</strong></p>
+                            <p><i class="fas fa-clock text-primary-600 mr-2"></i> Entrega: <strong>15-18 días</strong></p>
+                            <p><i class="fas fa-dollar-sign text-primary-600 mr-2"></i> <strong>$10,000 - $20,000</strong> / prenda</p>
+                        </div>
+
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded font-semibold">🏆 Taller Oro</span>
+                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-semibold">✓ Disponible</span>
+                        </div>
+
+                        <p class="text-sm text-gray-600 mb-4">Especialistas en ropa infantil con materiales de primera calidad...</p>
+
+                        <div class="flex space-x-2">
+                            <a href="perfil-taller.html?id=4" class="flex-1 bg-primary-600 text-white py-2 rounded-lg text-center font-semibold hover:bg-primary-700 transition">
+                                Ver Perfil
+                            </a>
+                            <button class="px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taller Card 5 -->
+                <div class="bg-white rounded-xl shadow-sm card-hover overflow-hidden opacity-60">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Estilo Urbano</h3>
+                                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-primary-600 mr-1"></i> San Luis, Cúcuta</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="far fa-heart text-2xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center text-amber-500 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-900">4.7</span>
+                            <span class="text-sm text-gray-600 ml-1">(22 reseñas)</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Streetwear</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Chaquetas</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Jeans</span>
+                        </div>
+
+                        <div class="space-y-2 mb-4 text-sm text-gray-600">
+                            <p><i class="fas fa-box text-primary-600 mr-2"></i> Pedido mínimo: <strong>30 unidades</strong></p>
+                            <p><i class="fas fa-clock text-primary-600 mr-2"></i> Entrega: <strong>18-22 días</strong></p>
+                            <p><i class="fas fa-dollar-sign text-primary-600 mr-2"></i> <strong>$20,000 - $35,000</strong> / prenda</p>
+                        </div>
+
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded font-semibold">⏸ No disponible</span>
+                        </div>
+
+                        <p class="text-sm text-gray-600 mb-4">Taller joven especializado en moda urbana y streetwear...</p>
+
+                        <div class="flex space-x-2">
+                            <a href="perfil-taller.html?id=5" class="flex-1 bg-gray-400 text-white py-2 rounded-lg text-center font-semibold cursor-not-allowed">
+                                Ver Perfil
+                            </a>
+                            <button class="px-4 py-2 border-2 border-gray-300 text-gray-400 rounded-lg font-semibold cursor-not-allowed">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taller Card 6 -->
+                <div class="bg-white rounded-xl shadow-sm card-hover overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-xl font-bold text-gray-900 mb-1">Confecciones El Éxito</h3>
+                                <p class="text-sm text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-primary-600 mr-1"></i> Atalaya, Cúcuta</p>
+                            </div>
+                            <button class="text-gray-400 hover:text-red-500">
+                                <i class="far fa-heart text-2xl"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center mb-4">
+                            <div class="flex items-center text-amber-500 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-900">4.8</span>
+                            <span class="text-sm text-gray-600 ml-1">(28 reseñas)</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Blusas</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Faldas</span>
+                            <span class="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded">Vestidos casuales</span>
+                        </div>
+
+                        <div class="space-y-2 mb-4 text-sm text-gray-600">
+                            <p><i class="fas fa-box text-primary-600 mr-2"></i> Pedido mínimo: <strong>20 unidades</strong></p>
+                            <p><i class="fas fa-clock text-primary-600 mr-2"></i> Entrega: <strong>12-16 días</strong></p>
+                            <p><i class="fas fa-dollar-sign text-primary-600 mr-2"></i> <strong>$15,000 - $28,000</strong> / prenda</p>
+                        </div>
+
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded font-semibold">🏆 Taller Oro</span>
+                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded font-semibold">✓ Disponible</span>
+                        </div>
+
+                        <p class="text-sm text-gray-600 mb-4">Más de 20 años confeccionando prendas femeninas. Calidad garantizada...</p>
+
+                        <div class="flex space-x-2">
+                            <a href="perfil-taller.html?id=6" class="flex-1 bg-primary-600 text-white py-2 rounded-lg text-center font-semibold hover:bg-primary-700 transition">
+                                Ver Perfil
+                            </a>
+                            <button class="px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-50 transition">
+                                <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/data/mock-data.js"></script>
+    <script>
+        // Filter chips functionality
+        const filterChips = document.querySelectorAll('.filter-chip');
+        
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                this.classList.toggle('active');
+                // Here you would implement actual filtering logic
+            });
+        });
+
+        // Heart/favorite functionality
+        document.querySelectorAll('.fa-heart').forEach(heart => {
+            heart.parentElement.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    icon.classList.add('text-red-500');
+                } else {
+                    icon.classList.remove('fas', 'text-red-500');
+                    icon.classList.add('far');
+                }
+            });
+        });
+
+        // Check if user is logged in
+        if (!localStorage.getItem('userRole')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

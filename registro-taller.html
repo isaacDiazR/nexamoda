@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Taller - NexaModa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#6b21a8',
+                            700: '#5b1a8c',
+                            800: '#4c1570',
+                            900: '#3d1158',
+                        },
+                        accent: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#d4af37',
+                            600: '#b8941f',
+                            700: '#9d7c1a',
+                            800: '#826515',
+                            900: '#674e11',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #6b21a8 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f3e8ff 0%, #fef9c3 100%);
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(107, 33, 168, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+        }
+
+        .input-field:focus {
+            border-color: #6b21a8;
+            box-shadow: 0 0 0 3px rgba(107, 33, 168, 0.1);
+        }
+
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+
+        .step-indicator.active {
+            background: linear-gradient(135deg, #6b21a8 0%, #a855f7 100%);
+            color: white;
+        }
+
+        .step-indicator.completed {
+            background: #6b21a8;
+            color: white;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 hero-pattern min-h-screen">
+    
+    <!-- Navbar Simple -->
+    <nav class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-scissors text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold gradient-text">NexaModa</span>
+                </a>
+                
+                <!-- Link -->
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-600 text-sm">¿Ya tienes cuenta?</span>
+                    <a href="login.html" class="text-primary-600 font-semibold hover:text-primary-700 transition">
+                        Iniciar Sesión
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-24 pb-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 mx-auto bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-industry text-white text-3xl"></i>
+                </div>
+                <h1 class="text-4xl font-bold mb-2">
+                    <span class="gradient-text">Registro de Taller</span>
+                </h1>
+                <p class="text-xl text-gray-600">Únete a nuestra red de talleres certificados</p>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="mb-12">
+                <div class="flex justify-between items-center max-w-2xl mx-auto">
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="step-indicator active w-12 h-12 rounded-full flex items-center justify-center font-bold mb-2" data-step="1">
+                            1
+                        </div>
+                        <span class="text-sm font-semibold text-gray-700">Información Básica</span>
+                    </div>
+                    <div class="flex-1 h-1 bg-gray-200 mx-2" id="progress-1"></div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="step-indicator w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-bold mb-2" data-step="2">
+                            2
+                        </div>
+                        <span class="text-sm text-gray-500">Tu Taller</span>
+                    </div>
+                    <div class="flex-1 h-1 bg-gray-200 mx-2" id="progress-2"></div>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="step-indicator w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-bold mb-2" data-step="3">
+                            3
+                        </div>
+                        <span class="text-sm text-gray-500">Confirmación</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Container -->
+            <div class="bg-white rounded-2xl p-8 md:p-10 shadow-xl">
+                <form id="registroForm">
+                    
+                    <!-- Step 1: Información Básica -->
+                    <div class="form-section active" data-section="1">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-900">Información Básica</h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="md:col-span-2">
+                                <label for="nombreTaller" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Nombre del Taller *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="nombreTaller" 
+                                    name="nombreTaller" 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                    placeholder="Confecciones María"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label for="nombrePropietario" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Nombre del Propietario *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="nombrePropietario" 
+                                    name="nombrePropietario" 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                    placeholder="María García"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Correo Electrónico *
+                                </label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                    placeholder="taller@email.com"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label for="telefono" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Teléfono *
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="telefono" 
+                                    name="telefono" 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                    placeholder="301 234 5678"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label for="direccion" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Dirección del Taller *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="direccion" 
+                                    name="direccion" 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                    placeholder="Calle 10 #5-20, Atalaya"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label for="ubicacion" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Sector/Barrio *
+                                </label>
+                                <select 
+                                    id="ubicacion" 
+                                    name="ubicacion" 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                    required
+                                >
+                                    <option value="">Selecciona el sector</option>
+                                    <option value="Atalaya">Atalaya</option>
+                                    <option value="Centro">Centro</option>
+                                    <option value="La Libertad">La Libertad</option>
+                                    <option value="San Luis">San Luis</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Contraseña *
+                                </label>
+                                <div class="relative">
+                                    <input 
+                                        type="password" 
+                                        id="password" 
+                                        name="password" 
+                                        class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                        placeholder="••••••••"
+                                        required
+                                    >
+                                    <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePassword('password')">
+                                        <i class="fas fa-eye text-gray-400 hover:text-gray-600" id="toggleIconPassword"></i>
+                                    </button>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Mínimo 8 caracteres</p>
+                            </div>
+
+                            <div>
+                                <label for="confirmPassword" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Confirmar Contraseña *
+                                </label>
+                                <div class="relative">
+                                    <input 
+                                        type="password" 
+                                        id="confirmPassword" 
+                                        name="confirmPassword" 
+                                        class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                        placeholder="••••••••"
+                                        required
+                                    >
+                                    <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePassword('confirmPassword')">
+                                        <i class="fas fa-eye text-gray-400 hover:text-gray-600" id="toggleIconConfirmPassword"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-end">
+                            <button type="button" onclick="nextStep(1)" class="bg-gradient-to-r from-primary-600 to-accent-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+                                Siguiente <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Información del Taller -->
+                    <div class="form-section" data-section="2">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-900">Información del Taller</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                    Especialidades del taller * (Selecciona al menos una)
+                                </label>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="especialidades" value="Ropa casual" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Ropa casual</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="especialidades" value="Ropa formal" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Ropa formal</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="especialidades" value="Vestidos" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Vestidos</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="especialidades" value="Ropa deportiva" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Ropa deportiva</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="especialidades" value="Ropa infantil" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Ropa infantil</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="especialidades" value="Uniformes" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Uniformes</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="especialidades" value="Bordados" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Bordados</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="especialidades" value="Accesorios" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Accesorios</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="capacidadMensual" class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Capacidad mensual (unidades) *
+                                    </label>
+                                    <input 
+                                        type="number" 
+                                        id="capacidadMensual" 
+                                        name="capacidadMensual" 
+                                        class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                        placeholder="500"
+                                        min="1"
+                                        required
+                                    >
+                                </div>
+
+                                <div>
+                                    <label for="pedidoMinimo" class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Pedido mínimo (unidades) *
+                                    </label>
+                                    <input 
+                                        type="number" 
+                                        id="pedidoMinimo" 
+                                        name="pedidoMinimo" 
+                                        class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                        placeholder="20"
+                                        min="1"
+                                        required
+                                    >
+                                </div>
+
+                                <div>
+                                    <label for="tiempoEntrega" class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Tiempo de entrega promedio *
+                                    </label>
+                                    <select 
+                                        id="tiempoEntrega" 
+                                        name="tiempoEntrega" 
+                                        class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                        required
+                                    >
+                                        <option value="">Selecciona tiempo</option>
+                                        <option value="5-10 días">5-10 días</option>
+                                        <option value="10-15 días">10-15 días</option>
+                                        <option value="15-20 días">15-20 días</option>
+                                        <option value="20-30 días">20-30 días</option>
+                                        <option value="30+ días">Más de 30 días</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="rangoPrecios" class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Rango de precios por prenda *
+                                    </label>
+                                    <select 
+                                        id="rangoPrecios" 
+                                        name="rangoPrecios" 
+                                        class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                        required
+                                    >
+                                        <option value="">Selecciona rango</option>
+                                        <option value="$10,000 - $20,000">$10,000 - $20,000</option>
+                                        <option value="$20,000 - $30,000">$20,000 - $30,000</option>
+                                        <option value="$30,000 - $50,000">$30,000 - $50,000</option>
+                                        <option value="$50,000+">Más de $50,000</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="anosExperiencia" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Años de experiencia *
+                                </label>
+                                <input 
+                                    type="number" 
+                                    id="anosExperiencia" 
+                                    name="anosExperiencia" 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition"
+                                    placeholder="10"
+                                    min="0"
+                                    required
+                                >
+                            </div>
+
+                            <div>
+                                <label for="descripcion" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Descripción del taller *
+                                </label>
+                                <textarea 
+                                    id="descripcion" 
+                                    name="descripcion" 
+                                    rows="4"
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg outline-none transition resize-none"
+                                    placeholder="Cuéntanos sobre tu taller, servicios, maquinaria, equipo..."
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-3">
+                                    ¿Qué servicios adicionales ofreces?
+                                </label>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="servicios" value="Diseño" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Diseño</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="servicios" value="Patronaje" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Patronaje</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="servicios" value="Bordado" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Bordado</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 cursor-pointer transition">
+                                        <input type="checkbox" name="servicios" value="Estampado" class="text-primary-600 focus:ring-primary-500">
+                                        <span>Estampado</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-between">
+                            <button type="button" onclick="prevStep(2)" class="border-2 border-primary-600 text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition">
+                                <i class="fas fa-arrow-left mr-2"></i> Anterior
+                            </button>
+                            <button type="button" onclick="nextStep(2)" class="bg-gradient-to-r from-primary-600 to-accent-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+                                Siguiente <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Confirmación -->
+                    <div class="form-section" data-section="3">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-900">Confirmación</h2>
+                        
+                        <div class="bg-gradient-bg rounded-xl p-6 mb-6">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary-600 to-accent-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-industry text-white text-2xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-bold text-lg mb-2">Resumen de tu taller</h3>
+                                    <div class="space-y-2 text-sm text-gray-700">
+                                        <p><strong>Taller:</strong> <span id="resumenNombreTaller">-</span></p>
+                                        <p><strong>Propietario:</strong> <span id="resumenPropietario">-</span></p>
+                                        <p><strong>Email:</strong> <span id="resumenEmail">-</span></p>
+                                        <p><strong>Teléfono:</strong> <span id="resumenTelefono">-</span></p>
+                                        <p><strong>Ubicación:</strong> <span id="resumenUbicacion">-</span></p>
+                                        <p><strong>Capacidad mensual:</strong> <span id="resumenCapacidad">-</span> unidades</p>
+                                        <p><strong>Pedido mínimo:</strong> <span id="resumenMinimo">-</span> unidades</p>
+                                        <p><strong>Tiempo de entrega:</strong> <span id="resumenTiempo">-</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" id="terminos" required class="mt-1 text-primary-600 focus:ring-primary-500">
+                                <span class="text-sm text-gray-700">
+                                    Acepto los <a href="#" class="text-primary-600 font-semibold hover:underline">términos y condiciones</a> 
+                                    y la <a href="#" class="text-primary-600 font-semibold hover:underline">política de privacidad</a> de NexaModa.
+                                </span>
+                            </label>
+
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" id="verificacion" required class="mt-1 text-primary-600 focus:ring-primary-500">
+                                <span class="text-sm text-gray-700">
+                                    Certifico que la información proporcionada es verídica y acepto someterme al proceso de verificación de NexaModa.
+                                </span>
+                            </label>
+
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" id="newsletter" class="mt-1 text-primary-600 focus:ring-primary-500">
+                                <span class="text-sm text-gray-700">
+                                    Deseo recibir oportunidades de trabajo y actualizaciones de NexaModa.
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <i class="fas fa-info-circle text-blue-600 text-xl mt-0.5"></i>
+                                <div class="text-sm text-blue-900">
+                                    <p class="font-semibold mb-1">Proceso de verificación</p>
+                                    <p>Una vez registrado, nuestro equipo revisará tu información en las próximas 24-48 horas. Te notificaremos por email cuando tu taller esté aprobado y puedas comenzar a recibir solicitudes.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-between">
+                            <button type="button" onclick="prevStep(3)" class="border-2 border-primary-600 text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition">
+                                <i class="fas fa-arrow-left mr-2"></i> Anterior
+                            </button>
+                            <button type="submit" class="bg-gradient-to-r from-primary-600 to-accent-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition transform hover:scale-105">
+                                <i class="fas fa-check mr-2"></i> Registrar mi taller
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <!-- Alternate Registration -->
+                <div class="mt-8 pt-8 border-t border-gray-200">
+                    <p class="text-center text-gray-600 mb-4">O regístrate con</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="flex items-center justify-center px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition">
+                            <i class="fab fa-google text-red-500 text-xl mr-2"></i>
+                            <span class="font-semibold text-gray-700">Google</span>
+                        </button>
+                        <button class="flex items-center justify-center px-4 py-3 border-2 border-gray-200 rounded-lg hover:border-primary-600 hover:bg-primary-50 transition">
+                            <i class="fab fa-facebook text-blue-600 text-xl mr-2"></i>
+                            <span class="font-semibold text-gray-700">Facebook</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Switch to Emprendedor -->
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600">
+                        ¿Eres emprendedor? 
+                        <a href="registro-emprendedor.html" class="text-primary-600 font-semibold hover:underline">Regístrate como emprendedor</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function nextStep(step) {
+            if (!validateStep(step)) return;
+
+            currentStep = step + 1;
+            updateSteps();
+            
+            if (step === 2) {
+                updateResumen();
+            }
+        }
+
+        function prevStep(step) {
+            currentStep = step - 1;
+            updateSteps();
+        }
+
+        function updateSteps() {
+            // Update sections
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${currentStep}"]`).classList.add('active');
+
+            // Update indicators
+            document.querySelectorAll('.step-indicator').forEach(indicator => {
+                const stepNum = parseInt(indicator.dataset.step);
+                indicator.classList.remove('active', 'completed');
+                
+                if (stepNum === currentStep) {
+                    indicator.classList.add('active');
+                } else if (stepNum < currentStep) {
+                    indicator.classList.add('completed');
+                    indicator.innerHTML = '<i class="fas fa-check"></i>';
+                } else {
+                    indicator.textContent = stepNum;
+                }
+            });
+
+            // Update progress bars
+            for (let i = 1; i < currentStep; i++) {
+                const progressBar = document.getElementById(`progress-${i}`);
+                if (progressBar) {
+                    progressBar.classList.remove('bg-gray-200');
+                    progressBar.classList.add('bg-primary-600');
+                }
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function validateStep(step) {
+            const section = document.querySelector(`[data-section="${step}"]`);
+            const inputs = section.querySelectorAll('input[required]:not([type="checkbox"]), select[required], textarea[required]');
+            let valid = true;
+
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.classList.add('border-red-500');
+                    valid = false;
+                } else {
+                    input.classList.remove('border-red-500');
+                }
+            });
+
+            if (step === 1) {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Las contraseñas no coinciden');
+                    valid = false;
+                }
+                
+                if (password.length < 8) {
+                    alert('La contraseña debe tener al menos 8 caracteres');
+                    valid = false;
+                }
+            }
+
+            if (step === 2) {
+                const especialidades = section.querySelectorAll('input[name="especialidades"]:checked');
+                if (especialidades.length === 0) {
+                    alert('Debes seleccionar al menos una especialidad');
+                    valid = false;
+                }
+            }
+
+            if (!valid) {
+                alert('Por favor completa todos los campos requeridos');
+            }
+
+            return valid;
+        }
+
+        function updateResumen() {
+            document.getElementById('resumenNombreTaller').textContent = document.getElementById('nombreTaller').value;
+            document.getElementById('resumenPropietario').textContent = document.getElementById('nombrePropietario').value;
+            document.getElementById('resumenEmail').textContent = document.getElementById('email').value;
+            document.getElementById('resumenTelefono').textContent = document.getElementById('telefono').value;
+            document.getElementById('resumenUbicacion').textContent = document.getElementById('direccion').value + ', ' + document.getElementById('ubicacion').value;
+            document.getElementById('resumenCapacidad').textContent = document.getElementById('capacidadMensual').value;
+            document.getElementById('resumenMinimo').textContent = document.getElementById('pedidoMinimo').value;
+            document.getElementById('resumenTiempo').textContent = document.getElementById('tiempoEntrega').value;
+        }
+
+        function togglePassword(fieldId) {
+            const passwordInput = document.getElementById(fieldId);
+            const toggleIcon = document.getElementById(`toggleIcon${fieldId.charAt(0).toUpperCase() + fieldId.slice(1)}`);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Form submission
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!document.getElementById('terminos').checked || !document.getElementById('verificacion').checked) {
+                alert('Debes aceptar los términos y condiciones y la verificación');
+                return;
+            }
+
+            // Simulate successful registration
+            const button = this.querySelector('button[type="submit"]');
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Registrando tu taller...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                localStorage.setItem('userRole', 'taller');
+                localStorage.setItem('userEmail', document.getElementById('email').value);
+                localStorage.setItem('userTaller', document.getElementById('nombreTaller').value);
+                
+                window.location.href = 'dashboard-taller.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
