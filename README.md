@@ -78,6 +78,9 @@ La paleta de colores está basada en el logo de NexaModa:
 nexamoda/
 ├── index.html                        # Landing page principal
 ├── login.html                        # Página de inicio de sesión
+├── perfil-taller.html                # Perfil detallado del taller
+├── perfil-emprendedor.html           # Perfil del emprendedor
+├── proyecto.html                     # Vista detallada de proyecto
 ├── registro-emprendedor.html         # Registro para emprendedores
 ├── registro-taller.html              # Registro para talleres
 ├── dashboard-emprendedor.html        # Dashboard de emprendedor
@@ -91,8 +94,15 @@ nexamoda/
 ├── Contexto/
 │   ├── prototipado.md                # Documentación de ideación
 │   └── desarrollo_prototipo.md       # Documentación de desarrollo
-└── Landing anterior/
-    └── index.html                    # Versión anterior de la landing
+├── Landing anterior/
+│   └── index.html                    # Versión anterior de la landing
+├── Dockerfile                        # Configuración de contenedor Docker
+├── docker-compose.yml                # Orquestación con Docker Compose
+├── .dockerignore                     # Archivos excluidos del build
+├── nginx.conf                        # Configuración del servidor Nginx
+├── docker-build.ps1                  # Script automatizado de build
+├── docker-compose-build.ps1          # Script automatizado con Compose
+└── README.md                         # Este archivo
 ```
 
 ## 🔧 Tecnologías Utilizadas
@@ -102,6 +112,8 @@ nexamoda/
 - **Font Awesome 6**: Iconografía
 - **JavaScript Vanilla**: Funcionalidades interactivas
 - **LocalStorage**: Simulación de autenticación y datos persistentes
+- **Docker & Docker Compose**: Contenedorización y despliegue
+- **Nginx**: Servidor web optimizado para archivos estáticos
 
 ## 🎯 Datos de Ejemplo
 
@@ -122,11 +134,48 @@ El prototipo incluye datos de ejemplo en `assets/data/mock-data.js`:
 
 ## 🚀 Cómo Usar el Prototipo
 
-### 1. Abrir el proyecto
+### Opción 1: Directo en el navegador
 ```bash
 # Simplemente abre index.html en tu navegador
 # O usa un servidor local como Live Server
 ```
+
+### Opción 2: Con Docker Compose 🐳
+
+#### Requisitos previos:
+- Docker Desktop instalado ([Descargar aquí](https://www.docker.com/products/docker-desktop))
+- Docker Desktop corriendo
+
+#### Comandos Docker Compose:
+
+```powershell
+# Construir e iniciar (modo detached)
+docker compose up -d --build
+
+# Ver logs en tiempo real
+docker compose logs -f
+
+# Ver estado de los contenedores
+docker compose ps
+
+# Detener los servicios
+docker compose stop
+
+# Reiniciar los servicios
+docker compose restart
+
+# Detener y eliminar todo (contenedores, redes)
+docker compose down
+
+# Ver logs de un servicio específico
+docker compose logs nexamoda-web -f
+
+# Reconstruir sin caché
+docker compose build --no-cache
+docker compose up -d
+```
+
+**La aplicación estará disponible en:** http://localhost:3000
 
 ### 2. Flujo de Emprendedor
 1. Abre `index.html`
@@ -189,13 +238,37 @@ Todas las páginas están optimizadas para:
 
 ## 🔄 Próximas Funcionalidades (No implementadas)
 
-Las siguientes páginas no están implementadas en este prototipo:
-- Página de perfil de taller (detallado)
-- Página de perfil de emprendedor (editable)
-- Vista detallada de proyecto individual
-- Sistema de mensajería
-- Sistema de pagos
-- Cargar imágenes de portafolio
+Las siguientes funcionalidades no están implementadas en este prototipo visual:
+- Sistema de mensajería en tiempo real
+- Sistema de pagos integrado
+- Cargar imágenes de portafolio (actualmente son placeholders)
+- Edición de perfil con formularios
+- Sistema de notificaciones push
+- Backend con API REST y base de datos
+
+## 🐳 Docker & Despliegue
+
+### Arquitectura de Contenedores
+
+El proyecto utiliza:
+- **Imagen base**: `nginx:alpine` (ligera y optimizada)
+- **Puerto**: 3000 (externo) → 80 (interno)
+- **Servidor web**: Nginx con configuración personalizada
+- **Volúmenes**: Montaje de código para desarrollo en tiempo real
+
+### Características de Docker:
+- ✅ Compresión gzip habilitada
+- ✅ Caché de archivos estáticos optimizado
+- ✅ Headers de seguridad configurados
+- ✅ Redirección de errores 404
+- ✅ Build multi-stage preparado para producción
+- ✅ Scripts PowerShell para automatización
+
+### Variables de Entorno:
+```yaml
+NGINX_HOST: localhost
+NGINX_PORT: 80
+```
 
 ## 🐛 Notas de Desarrollo
 
