@@ -175,7 +175,9 @@ docker compose build --no-cache
 docker compose up -d
 ```
 
-**La aplicación estará disponible en:** http://localhost:3000
+**La aplicación estará disponible en:** 
+- **Local:** http://localhost:3000
+- **Servidor:** http://tu-servidor:8090
 
 ### 2. Flujo de Emprendedor
 1. Abre `index.html`
@@ -278,14 +280,14 @@ El proyecto incluye un workflow de GitHub Actions que despliega automáticamente
 
 #### Requisitos previos en el servidor:
 ```bash
-# Instalar Docker y Docker Compose
+# El servidor ya debe tener Docker instalado
+# Si no lo tiene:
 sudo apt update
 sudo apt install docker.io docker-compose-plugin -y
 sudo usermod -aG docker $USER
 
-# Crear directorio de despliegue
-sudo mkdir -p /var/www/nexamoda
-sudo chown $USER:$USER /var/www/nexamoda
+# El workflow creará automáticamente ~/nexamoda
+# Puerto usado: 8090 (evita conflicto con CapRover en 3000)
 ```
 
 #### Secrets necesarios en GitHub:
@@ -315,8 +317,14 @@ También puedes ejecutar el workflow manualmente desde:
 
 ```bash
 # En el servidor
-cd /var/www/nexamoda
+cd ~/nexamoda
 docker compose logs -f
+
+# Ver si el contenedor está corriendo
+docker ps | grep nexamoda
+
+# Acceder a la app
+# http://tu-servidor:8090
 ```
 
 ## 🐛 Notas de Desarrollo

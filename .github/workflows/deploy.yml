@@ -36,26 +36,39 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
         run: |
           ssh -i ~/.ssh/deploy_key -p $SSH_PORT $SSH_USER@$SSH_HOST << 'EOF'
-            cd /var/www/nexamoda || mkdir -p /var/www/nexamoda && cd /var/www/nexamoda
+            # Crear directorio si no existe
+            mkdir -p ~/nexamoda
+            cd ~/nexamoda
             
             # Clonar o actualizar repositorio
             if [ -d ".git" ]; then
+              echo "📥 Actualizando repositorio..."
               git fetch origin
               git reset --hard origin/main
+              git pull origin main
             else
+              echo "📥 Clonando repositorio..."
               git clone https://github.com/${{ github.repository }} .
             fi
             
             # Detener contenedores anteriores
-            docker compose down || true
+            echo "🛑 Deteniendo contenedores anteriores..."
+            docker compose down 2>/dev/null || true
             
             # Construir y levantar contenedores
+            echo "🔨 Construyendo y desplegando..."
             docker compose up -d --build
             
+            # Verificar que esté corriendo
+            echo "✅ Verificando contenedores..."
+            docker compose ps
+            
             # Limpiar imágenes antiguas
+            echo "🧹 Limpiando imágenes antiguas..."
             docker image prune -f
             
             echo "✅ Deployment completed successfully!"
+            echo "🌐 NexaModa disponible en puerto 3000"
           EOF
 
       - name: 🧹 Cleanup
