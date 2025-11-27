@@ -270,6 +270,55 @@ NGINX_HOST: localhost
 NGINX_PORT: 80
 ```
 
+## 🚀 CI/CD con GitHub Actions
+
+### Despliegue Automático
+
+El proyecto incluye un workflow de GitHub Actions que despliega automáticamente en cada push a `main`.
+
+#### Requisitos previos en el servidor:
+```bash
+# Instalar Docker y Docker Compose
+sudo apt update
+sudo apt install docker.io docker-compose-plugin -y
+sudo usermod -aG docker $USER
+
+# Crear directorio de despliegue
+sudo mkdir -p /var/www/nexamoda
+sudo chown $USER:$USER /var/www/nexamoda
+```
+
+#### Secrets necesarios en GitHub:
+
+Ve a tu repositorio → Settings → Secrets and variables → Actions y agrega:
+
+- `SSH_HOST` - IP o dominio de tu servidor
+- `SSH_USER` - Usuario SSH (ej: ubuntu, root)
+- `SSH_KEY` - Tu clave privada SSH (contenido completo)
+- `SSH_PORT` - Puerto SSH (opcional, default: 22)
+
+#### Flujo de trabajo:
+
+1. **Push a main** → Activa el workflow
+2. **Checkout** → Descarga el código
+3. **SSH al servidor** → Conecta con tu servidor
+4. **Git pull** → Actualiza el código en el servidor
+5. **Docker Compose** → Reconstruye y despliega
+6. **Limpieza** → Elimina imágenes antiguas
+
+#### Despliegue manual:
+
+También puedes ejecutar el workflow manualmente desde:
+- GitHub → Actions → Deploy NexaModa to Server → Run workflow
+
+#### Ver logs del deployment:
+
+```bash
+# En el servidor
+cd /var/www/nexamoda
+docker compose logs -f
+```
+
 ## 🐛 Notas de Desarrollo
 
 - Este es un **prototipo visual** sin backend

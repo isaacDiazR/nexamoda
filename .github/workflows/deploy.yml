@@ -1,0 +1,69 @@
+name: Deploy NexaModa to Server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔑 Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+
+      - name: 📦 Deploy to Server
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p $SSH_PORT $SSH_USER@$SSH_HOST << 'EOF'
+            cd /var/www/nexamoda || mkdir -p /var/www/nexamoda && cd /var/www/nexamoda
+            
+            # Clonar o actualizar repositorio
+            if [ -d ".git" ]; then
+              git fetch origin
+              git reset --hard origin/main
+            else
+              git clone https://github.com/${{ github.repository }} .
+            fi
+            
+            # Detener contenedores anteriores
+            docker compose down || true
+            
+            # Construir y levantar contenedores
+            docker compose up -d --build
+            
+            # Limpiar imágenes antiguas
+            docker image prune -f
+            
+            echo "✅ Deployment completed successfully!"
+          EOF
+
+      - name: 🧹 Cleanup
+        if: always()
+        run: |
+          rm -f ~/.ssh/deploy_key
+
+      - name: ✅ Deployment Status
+        run: |
+          echo "🎉 NexaModa deployed successfully!"
+          echo "🌐 Check your server: http://${{ secrets.SSH_HOST }}:3000"
